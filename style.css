@@ -39,3 +39,9 @@ th{
     display: flex;
     flex-direction: row;
 }
+
+#body{
+    display: flex;
+    flex-direction: row;
+    height: 85%;
+}

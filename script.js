@@ -51,3 +51,58 @@ async function fetchCards(){
     cardReq.send();
 }
 
+function playGame(){
+    const warBttn = document.querySelector('#warBttn');
+    warBttn.setAttribute('disabled', 'true');
+
+    var userCard = userCards.pop();
+    var oppCard = oppCards.pop();
+
+    switch(userCard.value){
+        case "JACK":
+            userCard.value = 11;
+            break;
+        case "QUEEN":
+            userCard.value = 12;
+            break;
+        case "KING":
+            userCard.value = 13;
+            break;
+        case "ACE":
+            userCard.value = 14;
+            break;
+    }
+    switch(oppCard.value){
+        case "JACK":
+            oppCard.value = 11;
+            break;
+        case "QUEEN":
+            oppCard.value = 12;
+            break;
+        case "KING":
+            oppCard.value = 13;
+            break;
+        case "ACE":
+            oppCard.value = 14;
+            break;
+    }
+
+    setTimeout(() => {
+        if(userCard.value > oppCard.value){
+            userCards.unshift(oppCard);
+            userCards.unshift(userCard);
+        }else if(oppCard.value > userCard.value){
+            oppCards.unshift(userCard);
+            oppCards.unshift(oppCard);
+        }
+        document.querySelector('#oppCard').src = "";
+        document.querySelector('#userCard').src = "";
+
+        userScore.textContent = userCards.length;
+        oppScore.textContent = oppCards.length;
+        warBttn.removeAttribute('disabled');
+    }, 3000);
+
+    document.querySelector('#oppCard').src = oppCard.image;
+    document.querySelector('#userCard').src = userCard.image;
+}

@@ -10,13 +10,31 @@
         </div>
         <div id="body">
             <div id="tableSide">
-                <table>
-                    <th>Your Cards:</th>
-                    <th>Opponent Cards:</th>
+                <table id="scoreTable">
+                    <caption>Game Score</caption>
+                    <thead>
+                        <tr>
+                            <th>Your Cards:</th>
+                            <th>Opponent Cards:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="userScore">0</td>
+                            <td id="oppScore">0</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <button onclick="fetchCards();" id="gameBttn">
+                <button onclick="startGame();" id="gameBttn">
                     Start Game
                 </button>
+            </div>
+            <div id="gameSide">
+                <button>Play War!</button>
+                <div id="cardArea">
+                    <img src="">
+                    <img src="">
+                </div>
             </div>
         </div>
         <script src="./script.js" defer></script>

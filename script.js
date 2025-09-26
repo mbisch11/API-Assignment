@@ -2,6 +2,9 @@ var userCards= [];
 var oppCards = [];
 var deckID;
 
+var userScore = document.querySelector('#userScore');
+var oppScore = document.querySelector('#oppScore');
+
 window.onload = function(){
     var req = new XMLHttpRequest();
     req.open('GET', 'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1', true);
@@ -17,10 +20,17 @@ window.onload = function(){
     req.send();
 }
 
-function fetchCards(){
+async function startGame(){
+    await fetchCards();
+
+    userScore.textContent = userCards.length;
+    oppScore.textContent = oppCards.length;
+}
+
+async function fetchCards(){
     var cardReq = new XMLHttpRequest();
     var giveUserCard = true;
-    cardReq.open('GET',`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=52`);
+    cardReq.open('GET',`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=52`, true);
 
     cardReq.onload = function(){
         data = JSON.parse(this.response)
@@ -40,3 +50,4 @@ function fetchCards(){
     }
     cardReq.send();
 }
+

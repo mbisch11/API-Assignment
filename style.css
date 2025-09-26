@@ -1,9 +1,9 @@
-body{
+body {
     background-color: green;
     margin: 0px;
 }
 
-#head{
+#head {
     width: 100vw;
     background-color: antiquewhite;
     display: flex;
@@ -13,7 +13,29 @@ body{
     height: 15%;
 }
 
-#title{
+#title {
     font-size: 64px;
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+#tableSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    height: 85%;
+    gap: 16px;
+}
+
+#scoreTable {
+    border: 3px solid gray;
+}
+
+th{
+    border: 0.5px solid gray;
+}
+
+#gameSide{
+    display: flex;
+    flex-direction: row;
 }

@@ -1,5 +1,6 @@
 body{
     background-color: green;
+    margin: 0px;
 }
 
 #head{
@@ -8,8 +9,11 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    height: 15%;
 }
 
 #title{
-    font-size: 24px;
+    font-size: 64px;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 }

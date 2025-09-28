@@ -25,6 +25,41 @@ async function startGame(){
 
     userScore.textContent = userCards.length;
     oppScore.textContent = oppCards.length;
+
+    
+    userCards.forEach((card) => {
+        switch(card.value){
+            case "JACK":
+                card.value = 11;
+                break;
+            case "QUEEN":
+                card.value = 12;
+                break;
+            case "KING":
+                card.value = 13;
+                break;
+            case "ACE":
+                card.value = 14;
+                break;
+        }
+    })
+    oppCards.forEach((card) => {
+        switch(card.value){
+            case "JACK":
+                card.value = 11;
+                break;
+            case "QUEEN":
+                card.value = 12;
+                break;
+            case "KING":
+                card.value = 13;
+                break;
+            case "ACE":
+                card.value = 14;
+                break;
+        }
+    })
+    console.log(userCards, oppCards)
 }
 
 async function fetchCards(){
@@ -48,6 +83,7 @@ async function fetchCards(){
             console.error(`There has been an error: Status ${cardReq.status}`);
         }
     }
+
     cardReq.send();
 }
 
@@ -58,33 +94,18 @@ function playGame(){
     var userCard = userCards.pop();
     var oppCard = oppCards.pop();
 
-    switch(userCard.value){
-        case "JACK":
-            userCard.value = 11;
-            break;
-        case "QUEEN":
-            userCard.value = 12;
-            break;
-        case "KING":
-            userCard.value = 13;
-            break;
-        case "ACE":
-            userCard.value = 14;
-            break;
-    }
-    switch(oppCard.value){
-        case "JACK":
-            oppCard.value = 11;
-            break;
-        case "QUEEN":
-            oppCard.value = 12;
-            break;
-        case "KING":
-            oppCard.value = 13;
-            break;
-        case "ACE":
-            oppCard.value = 14;
-            break;
+    var userWarDeck = [];
+    var oppWarDeck = [];
+
+    document.querySelector('#oppCard').src = oppCard.image;
+    document.querySelector('#userCard').src = userCard.image;
+
+    if(userCard.value == oppCard.value){
+        userWarDeck = userCards.splice(userCards.length - 4, 4);
+        oppWarDeck = oppCards.splice(oppCards.length - 4, 4);
+
+        displayWar("user", userWarDeck[3]);
+        displayWar("opponent", oppWarDeck[3]);
     }
 
     setTimeout(() => {
@@ -94,15 +115,78 @@ function playGame(){
         }else if(oppCard.value > userCard.value){
             oppCards.unshift(userCard);
             oppCards.unshift(oppCard);
+        }else{
+            console.log(userWarDeck, oppWarDeck);
+            console.log(userWarDeck[3].value > oppWarDeck[3].value)
+            setTimeout(() => {
+                if(userWarDeck[3].value > oppWarDeck[3].value){
+                    userCards.unshift(userCard);
+                    userCards.unshift(oppCard);
+                    userWarDeck.forEach(card => {
+                        userCards.unshift(card);
+                    })
+                    userWarDeck = [];
+                    oppWarDeck.forEach(card => {
+                        userCards.unshift(card);
+                    })
+                    oppWarDeck = [];
+                }else if(oppWarDeck[3].value > userWarDeck[3].value){
+                    oppCards.unshift(userCard);
+                    oppCards.unshift(oppCard);
+                    userWarDeck.forEach(card => {
+                        userCards.unshift(card);
+                    })
+                    userWarDeck = [];
+                    oppWarDeck.forEach(card => {
+                        userCards.unshift(card);
+                    })
+                    oppWarDeck = [];
+                }
+                console.log(oppCards.length, userCards.length);  
+                userScore.textContent = userCards.length;
+                oppScore.textContent = oppCards.length;
+            }, 3000);
         }
         document.querySelector('#oppCard').src = "";
         document.querySelector('#userCard').src = "";
 
-        userScore.textContent = userCards.length;
-        oppScore.textContent = oppCards.length;
+        if(userCard.value != oppCard.value){
+            userScore.textContent = userCards.length;
+            oppScore.textContent = oppCards.length;
+        }
         warBttn.removeAttribute('disabled');
     }, 3000);
+}
 
-    document.querySelector('#oppCard').src = oppCard.image;
-    document.querySelector('#userCard').src = userCard.image;
+function displayWar(user, card){
+    var unturnedCards = [];
+    var warCard = card;
+    console.log(card);
+
+    if(user.toLowerCase() == "user"){
+        unturnedCards = document.querySelectorAll('#userWarCards');
+        warCard = document.querySelector('#userWarCard');
+
+        unturnedCards.forEach(card => {
+            card.src = "./cardBack.jpeg";
+        })
+        warCard.src = card.image;
+    }
+    if(user.toLowerCase() == "opponent"){
+        unturnedCards = document.querySelectorAll('#oppWarCards');
+        warCard = document.querySelector('#oppWarCard');
+
+        unturnedCards.forEach(card => {
+            card.src = "./cardBack.jpeg";
+        })
+        warCard.src = card.image;
+    }
+
+
+    setTimeout(() =>{
+        unturnedCards.forEach(card => {
+            card.src = "";
+        })
+        warCard.src = "";
+    }, 6000);
 }

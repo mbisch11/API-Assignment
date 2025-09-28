@@ -13,10 +13,41 @@ body {
     height: 15%;
 }
 
-#title {
-    font-size: 64px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+#body {
+    display: flex;
+    flex-direction: row;
+    height: 85%;
+    width: 100%;
 }
+
+#title {
+    font-size: 10vh;
+    font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+    margin: 0px;
+}
+button {
+    font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+    border-radius: 15px;
+    padding: 7.5px;
+    transition: all;
+    transition-duration: 350ms;
+    background-color: #a60303;
+    font-size: large;
+    color: white;
+    border: 2.5px solid white;
+}
+button:hover {
+    transform: scale(1.05);
+    background-color: #bf0404;
+}
+button:active {
+    transform: scale(0.95);
+    background-color: #780101;
+}
+button:disabled {
+    background-color: gray;
+}
+
 #tableSide {
     display: flex;
     flex-direction: column;
@@ -26,22 +57,54 @@ body {
     height: 85%;
     gap: 16px;
 }
-
 #scoreTable {
-    border: 3px solid gray;
+    border: 3.5px solid gray;
+    border-radius: 7.5px;
+    background-color: beige;
+    font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+    font-size: x-large;
+    text-align: center;
+}
+caption {
+    font-size: xx-large;
+}
+tr {
+    border-bottom: 1px solid gray;
 }
 
-th{
-    border: 0.5px solid gray;
-}
-
-#gameSide{
+#gameSide {
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
-
-#body{
+#warBttn {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#cardArea {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;   
+    gap: 15%;
+}
+#oppCards, #userCards {
     height: 85%;
+    display: flex;
+    flex-direction: column;
+}
+#oppCard, #oppWarCard, #userCard, #userWarCard{
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#warCards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 15%;
+    margin: 3.5px;
+    border-radius: 10px;
 }

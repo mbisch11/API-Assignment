@@ -76,11 +76,13 @@ tr {
     display: flex;
     flex-direction: row;
     width: 100%;
+    align-items: center; 
 }
+
 #warBttn {
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: 0;             
 }
+
 #cardArea {
     display: flex;
     flex-direction: row;
@@ -108,3 +110,6 @@ tr {
     margin: 3.5px;
     border-radius: 10px;
 }
+
+
+

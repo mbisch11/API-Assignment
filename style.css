@@ -53,7 +53,7 @@ button:disabled {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 35vw;
+    width: 37.5vw;
     height: 85%;
     gap: 16px;
 }
@@ -64,6 +64,7 @@ button:disabled {
     font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
     font-size: x-large;
     text-align: center;
+    margin: 7.5%;
 }
 caption {
     font-size: xx-large;
@@ -78,9 +79,11 @@ tr {
     width: 100%;
     align-items: center; 
 }
-
+#sideLabel {
+    font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+}
 #warBttn {
-    margin: 0;             
+    margin: 25px;             
 }
 #cardArea {
     display: flex;
@@ -97,7 +100,7 @@ tr {
     flex-direction: column;
 }
 #oppCard, #oppWarCard, #userCard, #userWarCard{
-    height: 30%;
+    height: 20%;
     margin-left: auto;
     margin-right: auto;
 }

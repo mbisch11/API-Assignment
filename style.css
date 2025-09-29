@@ -76,13 +76,11 @@ tr {
     display: flex;
     flex-direction: row;
     width: 100%;
+    align-items: center; 
 }
+
 #warBttn {
-    margin-top: auto;
-    margin-bottom: auto;
-}
-#sideLabel {
-    font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+    margin: 0;             
 }
 #cardArea {
     display: flex;
@@ -111,3 +109,6 @@ tr {
     margin: 3.5px;
     border-radius: 10px;
 }
+
+
+

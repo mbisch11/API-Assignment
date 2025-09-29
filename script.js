@@ -21,10 +21,12 @@ window.onload = function(){
 }
 
 async function startGame(){
-    await fetchCards();
+    fetchCards().then(() => {
+        userScore.textContent = userCards.length;
+        oppScore.textContent = oppCards.length;
+    });
 
-    userScore.textContent = userCards.length;
-    oppScore.textContent = oppCards.length;
+    
 
     
     userCards.forEach((card) => {
@@ -147,12 +149,17 @@ function playGame(){
                 oppScore.textContent = oppCards.length;
             }, 3000);
         }
-        document.querySelector('#oppCard').src = "";
-        document.querySelector('#userCard').src = "";
 
         if(userCard.value != oppCard.value){
             userScore.textContent = userCards.length;
             oppScore.textContent = oppCards.length;
+            document.querySelector('#oppCard').src = "";
+            document.querySelector('#userCard').src = "";
+        }else{
+            setTimeout(() => {
+                document.querySelector('#oppCard').src = "";
+                document.querySelector('#userCard').src = "";
+            }, 3000);
         }
         warBttn.removeAttribute('disabled');
     }, 3000);

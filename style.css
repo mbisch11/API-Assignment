@@ -53,7 +53,7 @@ button:disabled {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30vw;
+    width: 35vw;
     height: 85%;
     gap: 16px;
 }
@@ -81,6 +81,9 @@ tr {
     margin-top: auto;
     margin-bottom: auto;
 }
+#sideLabel {
+    font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+}
 #cardArea {
     display: flex;
     flex-direction: row;
@@ -96,7 +99,7 @@ tr {
     flex-direction: column;
 }
 #oppCard, #oppWarCard, #userCard, #userWarCard{
-    height: 50%;
+    height: 30%;
     margin-left: auto;
     margin-right: auto;
 }

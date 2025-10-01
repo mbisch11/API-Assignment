@@ -9,8 +9,6 @@ var oppScore = document.querySelector('#oppScore');
 TO FIX (TODO):
  - No game ending
  - If war starts and one player doesn't have enough cards, they lose
- - Takes 67 clicks to start a game
- - Can't start a new game if existing game is happening
  - Cards don't fit in container
  - Card values aren't always updated
  - Error message is only logged in console, not displayed
@@ -32,9 +30,58 @@ window.onload = function(){
 }
 
 async function startGame(){
+    if(oppCards.length > 0 || userCards.length > 0){
+        var req = new XMLHttpRequest();
+    req.open('GET', 'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1', true);
+    
+    req.onload = function(){
+        data = JSON.parse(this.response)
+        if (req.status == 200){
+            userCards = [];
+            oppCards = [];
+            deckID = data.deck_id;
+            fetchCards().then(() => {
+                userCards.forEach((card) => {
+                    switch(card.value){
+                        case "JACK":
+                            card.value = 11;
+                            break;
+                        case "QUEEN":
+                            card.value = 12;
+                            break;
+                        case "KING":
+                            card.value = 13;
+                            break;
+                        case "ACE":
+                            card.value = 14;
+                            break;
+                        }
+                    })
+                oppCards.forEach((card) => {
+                    switch(card.value){
+                        case "JACK":
+                            card.value = 11;
+                            break;
+                        case "QUEEN":
+                            card.value = 12;
+                            break;
+                        case "KING":
+                            card.value = 13;
+                            break;
+                        case "ACE":
+                            card.value = 14;
+                            break;
+                    }
+                }); 
+            });
+        } else {
+            console.error(`There has been an error: Status ${req.status}`);
+        }
+    }
+    req.send();
+    }
+
     fetchCards().then(() => {
-        userScore.textContent = userCards.length;
-        oppScore.textContent = oppCards.length;
         userCards.forEach((card) => {
             switch(card.value){
                 case "JACK":
@@ -68,8 +115,6 @@ async function startGame(){
             }
         })
     });
-    
-    console.log(userCards, oppCards)
 }
 
 async function fetchCards(){
@@ -92,13 +137,15 @@ async function fetchCards(){
         } else {
             console.error(`There has been an error: Status ${cardReq.status}`);
         }
+        userScore.textContent = userCards.length;
+        oppScore.textContent = oppCards.length;
     }
 
     cardReq.send();
 }
 
 function playGame(){
-    if(oppCards.length == 0 || userCards.length == 0){
+    if(oppCards.length == 0 && userCards.length == 0){
         console.error("One or both decks are empty! Start a new game.");
         return;
     }
@@ -126,11 +173,9 @@ function playGame(){
         if(userCard.value > oppCard.value){
             userCards.unshift(oppCard);
             userCards.unshift(userCard);
-            console.log(userCard, oppCard, userCard.value > oppCard.value);
         }else if(oppCard.value > userCard.value){
             oppCards.unshift(userCard);
             oppCards.unshift(oppCard);
-            console.log(userCard, oppCard, userCard.value < oppCard.value);
         }else{
             console.log(userWarDeck, oppWarDeck);
             console.log(userWarDeck[3].value > oppWarDeck[3].value)
@@ -176,6 +221,12 @@ function playGame(){
             }, 3000);
         }
         warBttn.removeAttribute('disabled');
+
+        if(oppCards.length == 0){
+            document.querySelector("#winLoseMsg").textContent = "You lose :(";
+        } else if (userCards.length == 0){
+            document.querySelector("#winLoseMsg").textContent = "You win! :)";
+        }
     }, 3000);
 }
 
@@ -184,24 +235,26 @@ function displayWar(user, card){
     var warCard = card;
     console.log(card);
 
-    if(user.toLowerCase() == "user"){
-        unturnedCards = document.querySelectorAll('#userWarCards');
-        warCard = document.querySelector('#userWarCard');
+    setTimeout(() => {
+        if(user.toLowerCase() == "user"){
+            unturnedCards = document.querySelectorAll('#userWarCards');
+            warCard = document.querySelector('#userWarCard');
 
-        unturnedCards.forEach(card => {
-            card.src = "./cardBack.jpeg";
-        })
-        warCard.src = card.image;
-    }
-    if(user.toLowerCase() == "opponent"){
-        unturnedCards = document.querySelectorAll('#oppWarCards');
-        warCard = document.querySelector('#oppWarCard');
+            unturnedCards.forEach(card => {
+                card.src = "./cardBack.jpeg";
+            })
+            warCard.src = card.image;
+        }
+        if(user.toLowerCase() == "opponent"){
+            unturnedCards = document.querySelectorAll('#oppWarCards');
+            warCard = document.querySelector('#oppWarCard');
 
-        unturnedCards.forEach(card => {
-            card.src = "./cardBack.jpeg";
-        })
-        warCard.src = card.image;
-    }
+            unturnedCards.forEach(card => {
+                card.src = "./cardBack.jpeg";
+            })
+            warCard.src = card.image;
+        }
+    }, 2500);
 
 
     setTimeout(() =>{

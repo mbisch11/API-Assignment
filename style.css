@@ -35,6 +35,7 @@ button {
     font-size: large;
     color: white;
     border: 2.5px solid white;
+    box-shadow: 0px 2.5px 5px 2.5px #4f4f4f;
 }
 button:hover {
     transform: scale(1.05);
@@ -65,6 +66,7 @@ button:disabled {
     font-size: x-large;
     text-align: center;
     margin: 7.5%;
+    box-shadow: 0px 2.5px 5px 2.5px #4f4f4f;
 }
 caption {
     font-size: xx-large;
@@ -81,6 +83,7 @@ tr {
 }
 #sideLabel {
     font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+    width: 150%;
 }
 #warBttn {
     margin: 25px;             
@@ -92,7 +95,8 @@ tr {
     align-items: center;
     margin-left: auto;
     margin-right: auto;   
-    gap: 15%;
+    gap: 30%;
+    height: 100%
 }
 #oppCards, #userCards {
     height: 85%;
@@ -100,7 +104,7 @@ tr {
     flex-direction: column;
 }
 #oppCard, #oppWarCard, #userCard, #userWarCard{
-    height: 20%;
+    height: 35%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -109,9 +113,8 @@ tr {
     flex-direction: row;
     justify-content: space-between;
     height: 15%;
-    margin: 3.5px;
-    border-radius: 10px;
 }
-
-
-
+#warCard {
+    margin: 3.5px;
+    border-radius: 10%;
+}
